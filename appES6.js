@@ -90,12 +90,25 @@ class Store {
 	}
 
 	// delete a book from local storage
-	static removeBook() {
+	static removeBook(isbn) {
+		const books = Store.getBooks();
 
+		books.forEach(function(book, index){
+			if(book.isbn === isbn) {
+				books.splice(index, 1);
+			}
+		});
+
+		localStorage.setItem('books', JSON.stringify(books));
 	}
 }
 
 // EVENT LISTENERS
+// event listener for showing books in library when page loads
+document.addEventListener('DOMContentLoaded', function() {
+	Store.displayBooks();
+});
+
 // submit event
 document.querySelector('#book-form').addEventListener('submit', function(e){
 	//grab the form field values
@@ -127,14 +140,14 @@ document.querySelector('#book-list').addEventListener('click', function(e){
 	const ui = new UI();
 	ui.deleteBook(e.target);
 
+	//remove from localStorage
+	// a -> td -> td containing isbn -> actual isbn number
+	let isbn = e.target.parentElement.previousElementSibling.textContent;
+	Store.removeBook(isbn);
+
 	//show a deleted alert when complete
 	// YES, I know this is an affirmative alert, but failure color works best for delete here and I'm too lazy to make another class just for this case so...
 	ui.showAlert('Removed from library', 'failure');
 
 	e.preventDefault();
 });
-
-// event listener for showing books in library when page loads
-document.addEventListener('DOMContentLoaded', function() {
-	Store.displayBooks();
-})
