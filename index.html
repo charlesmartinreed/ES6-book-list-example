@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+		<!-- SKELETON CSS-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+
+		<!-- CUSTOM CSS -->
+		<link rel="stylesheet" href="style.css">
+
+		<title>ES6 Book List Example</title>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Add Book</h1>
+
+			<!-- FORM -->
+			<form id="book-form">
+				<div>
+					<label for="title">Title</label>
+					<!-- u-full-width is from Skeleton CSS, makes the element full width -->
+					<input type="text" id="title" class="u-full-width">
+				</div>
+				<div>
+					<label for="author">Author</label>
+					<input type="text" id="author" class="u-full-width">
+				</div>
+				<div>
+					<label for="isbn">ISBN</label>
+					<input type="text" id="isbn" class="u-full-width">
+				</div>
+				<div>
+					<input type="submit" value="submit" class="u-full-width">
+				</div>
+			</form>
+
+			<!-- TABLE  -->
+			<table id="library-table" class="u-full-width">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Author</th>
+						<th>ISBN</th>
+						<!-- Delete link will go here -->
+						<th></th>
+					</tr>
+				</thead>
+				<!-- TBODY empty at load, we'll dynamically add fields here -->
+				<tbody id="book-list"></tbody>
+			</table>
+		</div>
+
+	<script src="app.js"></script>
+	<script src="appES6.js"></script>
+	</body>
+</html>
