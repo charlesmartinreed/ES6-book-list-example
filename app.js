@@ -67,14 +67,13 @@ document.getElementById('book-form').addEventListener('submit', function(e){
 
 		//instantiate a new book
 		const book = new Book(title, author, isbn);
-
 		//instantiate the UI
 		const ui = new UI();
 
 		// Validate input
 		if(title === '' || author === '' || isbn === ''){
 			//create an error alert
-			ui.showAlert('Please fill in all fields', 'error');
+			ui.showAlert('Please fill in all fields', 'failure');
 		} else {
 			//Add book to the list
 			ui.addBookToList(book);
