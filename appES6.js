@@ -57,6 +57,44 @@ class UI {
 	}
 }
 
+// STORAGE CLASS with static methods
+class Store {
+	// fetch books from local storage
+	static getBooks() {
+		let books;
+
+		// check local storage
+		if(localStorage.getItem('books') === null) {
+			books = [];
+		} else {
+			books = JSON.parse(localStorage.getItem('books'));
+		}
+
+		return books;
+	}
+
+	// display the fetched books
+	static displayBooks() {
+		const books = Store.getBooks();
+		const ui = new UI();
+		books.forEach(function(book) {
+			ui.addBookToList(book);
+		});
+	}
+
+	// add a new book to local storage
+	static addBook(book) {
+		const books = Store.getBooks();
+		books.push(book)
+		localStorage.setItem('books', JSON.stringify(books));
+	}
+
+	// delete a book from local storage
+	static removeBook() {
+
+	}
+}
+
 // EVENT LISTENERS
 // submit event
 document.querySelector('#book-form').addEventListener('submit', function(e){
@@ -74,6 +112,8 @@ document.querySelector('#book-form').addEventListener('submit', function(e){
 		ui.showAlert('Please complete all fields', 'error');
 	} else {
 		ui.addBookToList(book);
+		Store.addBook(book);
+
 		ui.showAlert(`${title} was added to the library!`, 'success');
 
 		ui.clearFields();
@@ -93,3 +133,8 @@ document.querySelector('#book-list').addEventListener('click', function(e){
 
 	e.preventDefault();
 });
+
+// event listener for showing books in library when page loads
+document.addEventListener('DOMContentLoaded', function() {
+	Store.displayBooks();
+})
