@@ -6,6 +6,10 @@ h1 {
 	color: var(--ruby-red);
 }
 
+input[type='text'] {
+	color: var(--ruby-red);
+}
+
 #library-table {
 	border-top: 1px solid var(--ruby-red);
 	padding-top: 20px;
